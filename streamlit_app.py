@@ -47,12 +47,5 @@ if ingredient_list:
         st.success('Your Smoothie is ordered!', icon="✅")
 
 # Fetch data from Fruityvice API
-try:
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-    fruityvice_response.raise_for_status()  # Check for HTTP errors
-    fruityvice_data = fruityvice_response.json()  # Parse JSON response
-    st.write(fruityvice_data)
-except requests.exceptions.RequestException as e:
-    st.error(f"An error occurred while fetching data from Fruityvice API: {e}")
-except ValueError as e:
-    st.error(f"An error occurred while decoding the JSON response: {e}")
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
