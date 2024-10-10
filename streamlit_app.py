@@ -1,7 +1,7 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col
-
+import requests
 
 # Write directly to the app
 st.title("Customize Your Smoothie! :balloon:")
@@ -46,7 +46,13 @@ if ingredient_list:
         
         st.success('Your Smoothie is ordered!', icon="✅")
 
-import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-fv_df = st.my_dataframe(data=fruityvice_response.json(), use_container_width=True)
-
+# Fetch data from Fruityvice API
+try:
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+    fruityvice_response.raise_for_status()  # Check for HTTP errors
+    fruityvice_data = fruityvice_response.json()  # Parse JSON response
+    st.write(fruityvice_data)
+except requests.exceptions.RequestException as e:
+    st.error(f"An error occurred while fetching data from Fruityvice API: {e}")
+except ValueError as e:
+    st.error(f"An error occurred while decoding the JSON response: {e}")
