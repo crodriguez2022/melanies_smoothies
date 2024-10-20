@@ -6,10 +6,12 @@ import requests
 # Write directly to the app
 st.title("Customize Your Smoothie! :balloon:")
 st.write(
-    """Choose the fruits you want in your custom Smoothie!
+    """**Choose the fruits you want in your custom Smoothie!**
     """
 )
 # Get the current credentials
+
+
 cnx = st.connection("snowflake")
 session = cnx.session()
 
@@ -29,7 +31,8 @@ if ingredient_list:
     st.text(ingredient_list)
 
     ingredients_string = ''
-
+    for fruit_chosen in ingredients_list:
+        ingredients_string += fruit_chosen + ' '
 
     
     #st.write(ingredients_string)
