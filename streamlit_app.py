@@ -21,12 +21,12 @@ st.write("The name on your Smoothie will be: ", name_on_order)
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 # st.dataframe(data=my_dataframe, use_container_width=True)
 
-ingredient_list = st.multiselect('Choose up to 5 ingredients: '
+ingredients_list = st.multiselect('Choose up to 5 ingredients: '
 ,my_dataframe
 ,max_selections=5
 )
 
-if ingredient_list:
+if ingredients_list:
     st.write(ingredient_list)
     st.text(ingredient_list)
 
